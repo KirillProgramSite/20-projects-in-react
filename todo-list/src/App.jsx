@@ -1,35 +1,66 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Task from './components/Task/Task'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [tasks, setTasks] = useState(
+    [
+      { id: 0, name: "Go to shopping", isCheck: false },
+      { id: 1, name: "Make project", isCheck: true },
+      { id: 2, name: "Learn new lang", isCheck: false },
+    ]
+  )
+
+  const [taskNameValue, setTaskNameValue] = useState('')
+
+  const handleCheck = (id) => {
+    setTasks((prevTasks) => 
+      prevTasks.map((task) =>
+        task.id === id ? {...task, isCheck: !task.isCheck} : task
+      )
+    )
+  }
+
+  const handleChangeTaskName = event => setTaskNameValue(event.target.value)
+
+  const addTask = () => {
+
+    let newTask = { 
+      id: Date.now(), 
+      name: taskNameValue, 
+      isCheck: false, 
+    }
+
+    setTasks([...tasks, newTask])
+    setTaskNameValue('')
+
+  }
+
+  //TODO: Сделать правильно код
+  const deleteTask = (id) => {
+
+    //TODO: Поавторить фильтры https://doka.guide/js/array-filter/
+    setTasks(tasks.filter(task => task.id != id))
+  }
+
+
+  const taskList = tasks.map((task) => <Task deleteTask={() => deleteTask(task.id)} onCheck={() => handleCheck(task.id)} key={task.id} name={task.name} isCheck={task.isCheck} id={task.id} />)
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Task in Today</h1>
+      <input value={taskNameValue} onChange={handleChangeTaskName} type="text" placeholder="Enter your task" />
+      <button onClick={() => addTask()}>Add Task</button>
+
+      <h2>Task list</h2>
+      {taskList}
     </>
   )
 }
+
+
 
 export default App
