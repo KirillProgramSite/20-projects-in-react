@@ -11,3 +11,9 @@
     width: 90vw;
     margin: 0 auto;
 }
+
+input[type="checkbox"]{
+    accent-color: #12cb0c;
+    width: 25px;
+    height: 25px;
+}
