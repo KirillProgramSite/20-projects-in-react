@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Button } from "../UI/Button.styled";
 import { TaskLeftWrapper, TaskName, TaskWrapper } from "./Task.styled";
 

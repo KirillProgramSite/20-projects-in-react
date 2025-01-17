@@ -45,9 +45,7 @@ function App() {
     }
   }
 
-  //TODO: Сделать правильно код
   const deleteTask = (id) => {
-    //TODO: Поавторить фильтры https://doka.guide/js/array-filter/
     setTasks(tasks.filter(task => task.id != id))
   }
 

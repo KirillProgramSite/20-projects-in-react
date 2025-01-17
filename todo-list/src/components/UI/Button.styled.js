@@ -17,7 +17,7 @@ export const Button = styled(motion.button)`
   color: white;
   border: none;
   padding: 5px 20px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   border-radius: 5px;
 `;
